@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище GAIReestrDBModelContainer" CdmEntityContainer="GAIReestrDBEntities">
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="GAIReestrDBModel.Cars">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NumberPlate" ColumnName="NumberPlate" />
+          <ScalarProperty Name="RegionPlate" ColumnName="RegionPlate" />
+          <ScalarProperty Name="MarkId" ColumnName="MarkId" />
+          <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+          <ScalarProperty Name="ProductionYear" ColumnName="ProductionYear" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Colors">
+      <EntityTypeMapping TypeName="GAIReestrDBModel.Colors">
+        <MappingFragment StoreEntitySet="Colors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marks">
+      <EntityTypeMapping TypeName="GAIReestrDBModel.Marks">
+        <MappingFragment StoreEntitySet="Marks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Owners">
+      <EntityTypeMapping TypeName="GAIReestrDBModel.Owners">
+        <MappingFragment StoreEntitySet="Owners">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+          <ScalarProperty Name="PatronomycName" ColumnName="PatronomycName" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

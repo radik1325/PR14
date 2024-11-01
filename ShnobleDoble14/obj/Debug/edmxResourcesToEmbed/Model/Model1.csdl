@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GAIReestrDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumberPlate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RegionPlate" Type="Int32" Nullable="false" />
+    <Property Name="MarkId" Type="Int32" Nullable="false" />
+    <Property Name="ColorId" Type="Int32" Nullable="false" />
+    <Property Name="ProductionYear" Type="Int32" Nullable="false" />
+    <Property Name="OwnerId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Colors" Relationship="Self.FK_Cars_Colors" FromRole="Cars" ToRole="Colors" />
+    <NavigationProperty Name="Marks" Relationship="Self.FK_Cars_Marks" FromRole="Cars" ToRole="Marks" />
+    <NavigationProperty Name="Owners" Relationship="Self.FK_Cars_Owners" FromRole="Cars" ToRole="Owners" />
+  </EntityType>
+  <EntityType Name="Colors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_Colors" FromRole="Colors" ToRole="Cars" />
+  </EntityType>
+  <EntityType Name="Marks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_Marks" FromRole="Marks" ToRole="Cars" />
+  </EntityType>
+  <EntityType Name="Owners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PatronomycName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_Owners" FromRole="Owners" ToRole="Cars" />
+  </EntityType>
+  <Association Name="FK_Cars_Colors">
+    <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+    <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="ColorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cars_Marks">
+    <End Role="Marks" Type="Self.Marks" Multiplicity="1" />
+    <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="MarkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cars_Owners">
+    <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+    <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owners">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="OwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GAIReestrDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cars" EntityType="Self.Cars" />
+    <EntitySet Name="Colors" EntityType="Self.Colors" />
+    <EntitySet Name="Marks" EntityType="Self.Marks" />
+    <EntitySet Name="Owners" EntityType="Self.Owners" />
+    <AssociationSet Name="FK_Cars_Colors" Association="Self.FK_Cars_Colors">
+      <End Role="Colors" EntitySet="Colors" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cars_Marks" Association="Self.FK_Cars_Marks">
+      <End Role="Marks" EntitySet="Marks" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cars_Owners" Association="Self.FK_Cars_Owners">
+      <End Role="Owners" EntitySet="Owners" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

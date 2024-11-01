@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище GAIReestrDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumberPlate" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RegionPlate" Type="int" Nullable="false" />
+    <Property Name="MarkId" Type="int" Nullable="false" />
+    <Property Name="ColorId" Type="int" Nullable="false" />
+    <Property Name="ProductionYear" Type="int" Nullable="false" />
+    <Property Name="OwnerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Colors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Marks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Owners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SecondName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PatronomycName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Cars_Colors">
+    <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+    <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="ColorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cars_Marks">
+    <End Role="Marks" Type="Self.Marks" Multiplicity="1" />
+    <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="MarkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cars_Owners">
+    <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+    <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owners">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="OwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище GAIReestrDBModelContainer">
+    <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marks" EntityType="Self.Marks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Owners" EntityType="Self.Owners" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cars_Colors" Association="Self.FK_Cars_Colors">
+      <End Role="Colors" EntitySet="Colors" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cars_Marks" Association="Self.FK_Cars_Marks">
+      <End Role="Marks" EntitySet="Marks" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cars_Owners" Association="Self.FK_Cars_Owners">
+      <End Role="Owners" EntitySet="Owners" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

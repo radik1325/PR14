@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище GAIReestrDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumberPlate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RegionPlate" Type="int" Nullable="false" />
+          <Property Name="MarkId" Type="int" Nullable="false" />
+          <Property Name="ColorId" Type="int" Nullable="false" />
+          <Property Name="ProductionYear" Type="int" Nullable="false" />
+          <Property Name="OwnerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecondName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatronomycName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cars_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="ColorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cars_Marks">
+          <End Role="Marks" Type="Self.Marks" Multiplicity="1" />
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="MarkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cars_Owners">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище GAIReestrDBModelContainer">
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marks" EntityType="Self.Marks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owners" EntityType="Self.Owners" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cars_Colors" Association="Self.FK_Cars_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cars_Marks" Association="Self.FK_Cars_Marks">
+            <End Role="Marks" EntitySet="Marks" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cars_Owners" Association="Self.FK_Cars_Owners">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GAIReestrDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumberPlate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RegionPlate" Type="Int32" Nullable="false" />
+          <Property Name="MarkId" Type="Int32" Nullable="false" />
+          <Property Name="ColorId" Type="Int32" Nullable="false" />
+          <Property Name="ProductionYear" Type="Int32" Nullable="false" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Colors" Relationship="Self.FK_Cars_Colors" FromRole="Cars" ToRole="Colors" />
+          <NavigationProperty Name="Marks" Relationship="Self.FK_Cars_Marks" FromRole="Cars" ToRole="Marks" />
+          <NavigationProperty Name="Owners" Relationship="Self.FK_Cars_Owners" FromRole="Cars" ToRole="Owners" />
+        </EntityType>
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_Colors" FromRole="Colors" ToRole="Cars" />
+        </EntityType>
+        <EntityType Name="Marks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_Marks" FromRole="Marks" ToRole="Cars" />
+        </EntityType>
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatronomycName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_Owners" FromRole="Owners" ToRole="Cars" />
+        </EntityType>
+        <Association Name="FK_Cars_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="ColorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cars_Marks">
+          <End Role="Marks" Type="Self.Marks" Multiplicity="1" />
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="MarkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cars_Owners">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GAIReestrDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cars" EntityType="Self.Cars" />
+          <EntitySet Name="Colors" EntityType="Self.Colors" />
+          <EntitySet Name="Marks" EntityType="Self.Marks" />
+          <EntitySet Name="Owners" EntityType="Self.Owners" />
+          <AssociationSet Name="FK_Cars_Colors" Association="Self.FK_Cars_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cars_Marks" Association="Self.FK_Cars_Marks">
+            <End Role="Marks" EntitySet="Marks" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cars_Owners" Association="Self.FK_Cars_Owners">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище GAIReestrDBModelContainer" CdmEntityContainer="GAIReestrDBEntities">
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="GAIReestrDBModel.Cars">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NumberPlate" ColumnName="NumberPlate" />
+                <ScalarProperty Name="RegionPlate" ColumnName="RegionPlate" />
+                <ScalarProperty Name="MarkId" ColumnName="MarkId" />
+                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+                <ScalarProperty Name="ProductionYear" ColumnName="ProductionYear" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="GAIReestrDBModel.Colors">
+              <MappingFragment StoreEntitySet="Colors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marks">
+            <EntityTypeMapping TypeName="GAIReestrDBModel.Marks">
+              <MappingFragment StoreEntitySet="Marks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owners">
+            <EntityTypeMapping TypeName="GAIReestrDBModel.Owners">
+              <MappingFragment StoreEntitySet="Owners">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="PatronomycName" ColumnName="PatronomycName" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
